@@ -6,46 +6,93 @@
                 display: flex;
                 justify-content: center;
                 align-items: center;
-                height: 100vh; /* Utilisation de la hauteur de la fenêtre */
-                margin: 0;
-            }
-    
-  <!--titre et image--> 
-
-            .imagegauche {
-                display: flex;
-                align-items: center; 
-                justify-content: center; 
-                gap: 20px;
-            }
-    
-            h2 {
-                color: rgb(72, 222, 209);
-                font-family: "Comic Sans MS", cursive, sans-serif;
-                margin: 0;
-            }
-    
-
-            .symetrik {
-                transform: scaleX(-1); 
             }
 
-            .liens_vers_pages {
-                position: absolute;
-                top: 20px;
-                right: 20px;
+    .imagegauche {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+    }
+
+    h2 {
+    color: rgb(72, 222, 209);
+    font-family: "Comic Sans MS", cursive, sans-serif;
+    margin: 0;
+    }
+
+    .symetrik {
+    transform: scaleX(-1);
+    }
+
+            .menu_déroulant {
+                position: fixed; 
+                top: 0;
+                right: 10; 
+                background-color: 'pink';
+                width: 250;
             }
-    
+            
+            /* Liste du menu */
+            .menu {
+                list-style: none; /* Supprime les puces des éléments de la liste */
+                padding: 0; /* Supprime les marges par défaut */
+                margin: 0; /* Supprime les marges par défaut */
+            }
+            
+            /* Élément de la liste (menu principal) */
+            .menu li {
+                display: inline-block; /* Les éléments du menu seront alignés horizontalement */
+                position: relative; /* Nécessaire pour le sous-menu déroulant */
+            }
+            
+            /* Style pour les liens du menu */
+            .menu a {
+                color: white; /* Couleur du texte */
+                padding: 10px 15px; /* Espacement autour des liens */
+                text-decoration: none; /* Enlève le soulignement par défaut */
+                display: inline-block; /* Permet d'agrandir la zone cliquable */
+            }
+            
+            /* Affiche un fond sombre lorsqu'on survole le lien */
+            .menu a:hover {
+                background-color: #555;
+            }
+            
+            /* Sous-menu déroulant */
+            .dropdown-content {
+                display: none; /* Cache le sous-menu par défaut */
+                position: absolute; /* Le positionne par rapport à son parent */
+                background-color: #333; /* Fond du sous-menu */
+                min-width: 160px; /* Largeur minimale du sous-menu */
+                z-index: 1; /* Assure que le sous-menu soit au-dessus des autres éléments */
+            }
+            
+            /* Liens du sous-menu */
+            .dropdown-content a {
+                color: white; /* Couleur du texte des liens du sous-menu */
+                padding: 10px 15px; /* Espacement autour des liens */
+                text-decoration: none; /* Enlève le soulignement */
+                display: block; /* Les éléments sont en bloc (occupent toute la largeur du sous-menu) */
+            }
+            
+            /* Affiche le sous-menu lorsque l'on survole l'élément parent */
+            .dropdown:hover .dropdown-content {
+                display: block; /* Affiche le sous-menu au survol */
+            }
+            
+            /* Changer la couleur des liens du sous-menu au survol */
+            .dropdown-content a:hover {
+                background-color: #555;
+            }
         </style>
     </head>
     
     <body>
         <div class="imagegauche">
-            <img src= "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQw5JeHBAEuUZ_BTwLYYT-VXR6ajGhf4JctbA&s" alt="lapin" width=50>
-            
+            <img src= "https://lh3.googleusercontent.com/proxy/2mz88gAV6Ju3coZxHXR856S6LPnY9XlTcECCsC5Yph-ztesZdqj43p_64qrpGWxtazAIcU_N3kUjKDSCTORAUXL-h-G1T9OSavAssyPCFSQ" alt="lapin" width=100>
             <h2>Bienvenue sur Lap1</h2>
-            
-            <img class="symetrik" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQw5JeHBAEuUZ_BTwLYYT-VXR6ajGhf4JctbA&s" alt="Lapin droit" width=50>
+            <img class="symetrik" src="https://lh3.googleusercontent.com/proxy/2mz88gAV6Ju3coZxHXR856S6LPnY9XlTcECCsC5Yph-ztesZdqj43p_64qrpGWxtazAIcU_N3kUjKDSCTORAUXL-h-G1T9OSavAssyPCFSQ" alt="Lapin droit" width=100>
         </div>
     
         <ul>
@@ -55,8 +102,19 @@
         </ul>
     </body>
 
-    <div class="liens_vers_pages">
-        🐰 <a href="{% url 'regles' %}">Voir les règles du jeu</a> <br>
-        🐰 <a href="{% url 'liste' %}">Voir la liste des élevages</a> <br>
-        🐰 <a href="{% url 'nouveau' %}">Créer un nouvel élevage </a>
-    </div>
+        <nav class="menu_déroulant">
+            <ul class="menu">
+                <li class="dropdown">
+                    <a href="#" class="dropbtn">Menu</a>
+                    <ul class="dropdown-content">
+                        <li>🐰 <a href="{% url 'regles' %}">Voir les règles du jeu</a></li>
+                        <li>🐰 <a href="{% url 'liste' %}">Voir la liste des élevages</a></li>
+                        <li>🐰 <a href="{% url 'nouveau' %}">Créer un nouvel élevage</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </nav>
+ 
+
+    
+  
