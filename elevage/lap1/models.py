@@ -4,14 +4,15 @@ from django.db import models
 from django.db import models
 
 class Elevage(models.Model):
-    name = models.CharField(max_length=200)
-    number_lapins = models.IntegerField()
-    food_quantity = models.FloatField()
-    number_cages = models.IntegerField()
-    money = models.FloatField()
+    Nom_de_mon_elevage = models.CharField(max_length=200)
+    Nombre_de_lapins_males = models.IntegerField()
+    Nombre_de_lapins_femelles = models.IntegerField()
+    Quantité_de_nourriture_initiale = models.FloatField()
+    Nombre_de_cages = models.IntegerField()
+    Argent_initial = models.FloatField()
 
     def __str__(self):
-        return self.name
+        return self.Nom_de_mon_élevage
     
 class Individu(models.Model):
     sexe_choix= [

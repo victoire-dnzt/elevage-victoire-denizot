@@ -1,11 +1,12 @@
 from django import forms
 from .models import Elevage
 
-class DébutForm(forms.ModelForm):
+class DebutForm(forms.ModelForm):
+    
     class Meta: 
 #usage d'une classe meta? pour le modèle
         model = Elevage
-        fields = ['name', 'number_lapins', 'food_quantity', 'number_cages', 'money']
+        fields = ['Nom_de_mon_elevage', 'Nombre_de_lapins_males', 'Nombre_de_lapins_femelles', 'Quantité_de_nourriture_initiale', 'Nombre_de_cages', 'Argent_initial']
 
 
 class ActionForm(forms.Form):

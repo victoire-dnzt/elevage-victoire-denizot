@@ -7,20 +7,18 @@
             font-family: Comic sans MS
         }
 
-        p::before {
-            content: "🐰 ";
-        }
 
     </style>
 </head>
 
 <body>
 <h2>Détails de l'élevage</h2>
-<p>Nom : {{ elevage.name }}</p>
-<p>Nombre de lapins : {{ elevage.number_lapins }}</p>
-<p>Quantité de nourriture : {{ elevage.food_quantity }}</p>
-<p>Nombre de cages : {{ elevage.number_cages }}</p>
-<p>Argent en caisse : {{ elevage.money }}</p>
+<p>Nom : {{ elevage.Nom_de_mon_elevage }}</p>
+<p>Nombre de lapins femelles : {{ elevage.Nombre_de_lapins_femelles}}</p>
+<p>Nombre de lapins males: {{elevage.Nombre_de_lapins_males}}
+<p>Quantité de nourriture : {{ elevage.Quantite_de_nourriture_initiale}}</p>
+<p>Nombre de cages : {{ elevage.Nombre_de_cages }}</p>
+<p>Argent en caisse : {{ elevage.Argent_initial }}</p>
 
 <h3>Individus</h3>
 <ul>
@@ -28,6 +26,22 @@
         <li>{{ individu }}</li>
     {% endfor %}
 </ul>
+
+<h3>Actions</h3>
+<form method="post">
+    
+    <div>
+        <label for="sale_lapins">Nombre de lapins à vendre :</label>
+        <input type="number" id="sale_lapins" name="sale_lapins" min="0" max="{{ total_lapins }}" value="0">
+    </div>
+    
+    <div>
+        <label for="achat_nourriture">Quantité de nourriture à acheter :</label>
+        <input type="number" id="achat_nourriture" name="achat_nourriture" min="0" value="0">
+    </div>
+    
+    <button type="submit">Valider les actions</button>
+</form>
 
 </body>
 

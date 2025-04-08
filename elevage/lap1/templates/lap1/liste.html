@@ -16,7 +16,7 @@
 <h2>Liste des élevages</h2>
 <ul>
     {% for elevage in elevages %}
-        <li><a href="{% url 'elevage' elevage.id %}">{{ elevage.nom }}</a></li>
+        <li><a href="{% url 'elevage' elevage.id %}">{{ elevage.Nom_de_mon_elevage }}</a></li>
     {% endfor %}
 </ul>
 </body>
