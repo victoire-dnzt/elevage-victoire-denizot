@@ -1,0 +1,34 @@
+<html>
+
+<head>
+    <style>
+        h2, h3 {
+            color:rgb(72, 222, 209);
+            font-family: Comic sans MS
+        }
+
+        p::before {
+            content: "🐰 ";
+        }
+
+    </style>
+</head>
+
+<body>
+<h2>Détails de l'élevage</h2>
+<p>Nom : {{ elevage.name }}</p>
+<p>Nombre de lapins : {{ elevage.number_lapins }}</p>
+<p>Quantité de nourriture : {{ elevage.food_quantity }}</p>
+<p>Nombre de cages : {{ elevage.number_cages }}</p>
+<p>Argent en caisse : {{ elevage.money }}</p>
+
+<h3>Individus</h3>
+<ul>
+    {% for individu in individus %}
+        <li>{{ individu }}</li>
+    {% endfor %}
+</ul>
+
+</body>
+
+<html>

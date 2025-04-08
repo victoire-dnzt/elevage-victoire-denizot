@@ -32,7 +32,7 @@ class Individu(models.Model):
     def __str__(self):
         return self.sexe + " - " + str(self.age) + " mois"
     
-    class Regle(models.Model):
+class Regle(models.Model):
         price_food = models.FloatField()
         price_cage = models.FloatField()
         price_sale_lapin = models.FloatField()

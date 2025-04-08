@@ -1,1 +1,6 @@
 <h2>Nouvel élevage</h2>
+<form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Créer</button>
+</form>

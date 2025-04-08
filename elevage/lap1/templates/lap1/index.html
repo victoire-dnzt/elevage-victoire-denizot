@@ -1,0 +1,62 @@
+    <head>
+        <style>
+
+            body {
+                background-color: rgb(248, 224, 240);
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                height: 100vh; /* Utilisation de la hauteur de la fenêtre */
+                margin: 0;
+            }
+    
+  <!--titre et image--> 
+
+            .imagegauche {
+                display: flex;
+                align-items: center; 
+                justify-content: center; 
+                gap: 20px;
+            }
+    
+            h2 {
+                color: rgb(72, 222, 209);
+                font-family: "Comic Sans MS", cursive, sans-serif;
+                margin: 0;
+            }
+    
+
+            .symetrik {
+                transform: scaleX(-1); 
+            }
+
+            .liens_vers_pages {
+                position: absolute;
+                top: 20px;
+                right: 20px;
+            }
+    
+        </style>
+    </head>
+    
+    <body>
+        <div class="imagegauche">
+            <img src= "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQw5JeHBAEuUZ_BTwLYYT-VXR6ajGhf4JctbA&s" alt="lapin" width=50>
+            
+            <h2>Bienvenue sur Lap1</h2>
+            
+            <img class="symetrik" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQw5JeHBAEuUZ_BTwLYYT-VXR6ajGhf4JctbA&s" alt="Lapin droit" width=50>
+        </div>
+    
+        <ul>
+            {% for elevage in elevages %}
+                <li><a href="{% url 'elevage' elevage.id %}">{{ elevage.nom }}</a></li>
+            {% endfor %}
+        </ul>
+    </body>
+
+    <div class="liens_vers_pages">
+        🐰 <a href="{% url 'regles' %}">Voir les règles du jeu</a> <br>
+        🐰 <a href="{% url 'liste' %}">Voir la liste des élevages</a> <br>
+        🐰 <a href="{% url 'nouveau' %}">Créer un nouvel élevage </a>
+    </div>

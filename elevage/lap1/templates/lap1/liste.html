@@ -1,0 +1,22 @@
+<head>
+    <style>
+        body {
+            background-color: rgb(248, 224, 240);
+        }
+
+        h2 {
+            color: rgb(72, 222, 209);
+            font-family: "Comic Sans MS", cursive, sans-serif;
+        }
+
+    </style>
+</head>
+
+<body>
+<h2>Liste des élevages</h2>
+<ul>
+    {% for elevage in elevages %}
+        <li><a href="{% url 'elevage' elevage.id %}">{{ elevage.nom }}</a></li>
+    {% endfor %}
+</ul>
+</body>
