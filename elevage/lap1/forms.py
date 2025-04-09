@@ -2,7 +2,6 @@ from django import forms
 from .models import Elevage
 
 class DebutForm(forms.ModelForm):
-    
     class Meta: 
 #usage d'une classe meta? pour le modèle
         model = Elevage
@@ -10,5 +9,6 @@ class DebutForm(forms.ModelForm):
 
 
 class ActionForm(forms.Form):
-    sale_lapins = forms.IntegerField(label='Nombre de lapins à vendre')
-    achat_nourriture = forms.FloatField(label='Quantité de nourriture à acheter')
+    class Meta:
+        sale_lapins = forms.IntegerField(label='Nombre de lapins à vendre')
+        achat_nourriture = forms.FloatField(label='Quantité de nourriture à acheter')

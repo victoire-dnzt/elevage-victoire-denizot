@@ -2,6 +2,9 @@ from django.shortcuts import render, redirect
 from .models import Elevage, Individu, Regle
 from .forms import DebutForm, ActionForm
 
+from django.core.exceptions import ObjectDoesNotExist
+
+
 def liste(request):
     elevages = Elevage.objects.all()
     return render(request, 'lap1/liste.html', {'elevages': elevages})
@@ -34,39 +37,45 @@ def new_elevage(request):
         form = DebutForm()
         return render(request, 'lap1/nouveau.html', {'form': form})
     
-def calcul_lapins(request, elevage_id):
-    elevage = Elevage.objects.get(id=elevage_id)
-    total_lapins = elevage.Nombre_de_lapins_femelles + elevage.Nombre_de_lapins_males
-    return render(request, 'lap1/elevage.html', {'elevage': elevage, 'total_lapins': total_lapins})
     
 def actions(request, elevage_id):
-    elevage = Elevage.objects.get(id=elevage_id)
+    try:
+        elevage = Elevage.objects.get(id=elevage_id)
+    except ObjectDoesNotExist:
+        return render(request, 'lap1/error.html', {'message': "Élevage introuvable."})
+
     if request.method == 'POST':
         form = ActionForm(request.POST)
         if form.is_valid():
-            lapins_a_vendre ='sale_lapins'
-            nourriture_a_acheter ='achat_nourriture'
+            lapins_a_vendre = request.POST.get('sale_lapins')
+            try:
+                lapins_a_vendre = int(lapins_a_vendre)
+            except (ValueError, TypeError):
+                lapins_a_vendre = 0 
+            nourriture_a_acheter = request.POST.get('achat_nourriture')
+            try:
+                nourriture_a_acheter = int(nourriture_a_acheter)
+            except (ValueError, TypeError):
+                nourriture_a_acheter = 0 
             
-            if lapins_a_vendre > elevage.nombre_lapins:
-                form.add_error('sale_lapins', "Pas le droit vendre plus de lapins que vous n'en avez, pardi.")
-            elif nourriture_a_acheter > elevage.argent_caisse:
-                form.add_error('achat_nourriture', "Pas assez d'argent, désolé.")
+            if lapins_a_vendre > elevage.Nombre_de_lapins_femelles + elevage.Nombre_de_lapins_males:
+                form.add_error('sale_lapins', "Pas assez de lapins.")
+            elif nourriture_a_acheter > elevage.Argent_initial:
+                form.add_error('achat_nourriture', "Pas assez d'argent.")
             else:
-                elevage.nombre_lapins = elevage.nombre_lapins - lapins_a_vendre 
-                elevage.quantite_nourriture = elevage.quantite_nourriture+ nourriture_a_acheter  
-                elevage.argent_caisse = elevage.argent_caisse + nourriture_a_acheter  
+                elevage.Nombre_de_lapins_femelles = elevage.Nombre_de_lapins_femelles - lapins_a_vendre
+                elevage.Quantité_de_nourriture_initiale = elevage.Quantité_de_nourriture_initiale+ nourriture_a_acheter  
+                elevage.Argent_initial = elevage.Argent_initial + nourriture_a_acheter  
                 elevage.save() 
                 
-                return redirect('elevage', elevage_id=elevage.id) 
+                return redirect('elevage', elevage_id=elevage.id)
         else:
-            # Si le formulaire n'est pas valide, on le renvoie avec les erreurs
             return render(request, 'lap1/actions.html', {'form': form, 'elevage': elevage})
     
     else:
-        # Affichage du formulaire vide
         form = ActionForm()
     
-    return render(request, 'lap1/actions.html', {'form': form, 'elevage': elevage})
+        return render(request, 'lap1/actions.html', {'form': form, 'elevage': elevage})
 
 def menu(request):
     return render(request, 'lap1/menu.html')

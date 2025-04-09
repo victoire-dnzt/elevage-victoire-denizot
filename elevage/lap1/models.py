@@ -1,7 +1,6 @@
 from django.db import models
 
 # Create your models here.
-from django.db import models
 
 class Elevage(models.Model):
     Nom_de_mon_elevage = models.CharField(max_length=200)
@@ -11,8 +10,9 @@ class Elevage(models.Model):
     Nombre_de_cages = models.IntegerField()
     Argent_initial = models.FloatField()
 
+
     def __str__(self):
-        return self.Nom_de_mon_élevage
+        return self.Nom_de_mon_elevage
     
 class Individu(models.Model):
     sexe_choix= [

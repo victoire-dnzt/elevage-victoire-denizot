@@ -1,5 +1,4 @@
 <html>
-
 <head>
     <style>
         h2, h3 {
@@ -28,11 +27,13 @@
 </ul>
 
 <h3>Actions</h3>
-<form method="post">
+
+<form action = "{% url 'actions' elevage.id %}" method="post">
+    {% csrf_token %}
     
     <div>
         <label for="sale_lapins">Nombre de lapins à vendre :</label>
-        <input type="number" id="sale_lapins" name="sale_lapins" min="0" max="{{ total_lapins }}" value="0">
+        <input type="number" id="sale_lapins" name="sale_lapins" min="0" max="{{elevage.Nombre_de_lapins_femelles}}" value="0">
     </div>
     
     <div>
