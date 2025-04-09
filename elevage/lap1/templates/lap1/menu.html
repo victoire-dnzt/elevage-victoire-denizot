@@ -1,3 +1,72 @@
-<li>🐰 <a href="{% url 'regles' %}">Voir les règles du jeu</a></li>
-<li>🐰 <a href="{% url 'liste' %}">Voir la liste des élevages</a></li>
-<li>🐰 <a href="{% url 'nouveau' %}">Créer un nouvel élevage</a></li>
+<html>
+<head>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color:rgb(249, 210, 242);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        h2 {
+            text-align: center; 
+            color: #48dece;"
+        }
+        
+
+        .bloc_du_milieu {
+            background-color: white;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            width: 80%;
+            max-width: 600px;
+        }
+
+        ul {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        li {
+            background-color: #f9f9f9;
+            margin: 10px 0;
+            padding: 10px;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            font-size: 18px;
+            transition: background-color 0.3s, transform 0.3s;
+        }
+
+        li:hover {
+            background-color: #48dece;
+            transform: translateX(10px);
+        }
+
+        li a {
+            text-decoration: none;
+            color: #333;
+            margin-left: 10px;
+            font-weight: bold;
+        }
+
+        li a:hover {
+            color: white;
+        }
+    </style>
+</head>
+<body>
+
+<div class="bloc_du_milieu">
+    <h2>Que souhaites-tu faire?</h2>
+    <ul>
+        <li>🐰 <a href="{% url 'regles' %}">Voir les règles du jeu</a></li>
+        <li>🐰 <a href="{% url 'liste' %}">Voir la liste des élevages</a></li>
+        <li>🐰 <a href="{% url 'nouveau' %}">Créer un nouvel élevage</a></li>
+    </ul>
+</div>
+
+</body>
+</html>

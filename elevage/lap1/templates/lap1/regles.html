@@ -1,17 +1,47 @@
-<h2>Règles du jeu</h2>
-<ul>
-    {% for regle in regles %}
-    <li>Prix de la nourriture : {{ regle.price_food }} €</li>
-    <li>Prix de la cage : {{ regle.price_cage }} €</li>
-    <li>Prix de vente d’un lapin : {{ regle.price_sale_lapin }} €</li>
-    <li>Conso 1 mois : {{ regle.conso_nourriture_1mois }} g</li>
-    <li>Conso 2 mois : {{ regle.conso_nourriture_2mois }} g</li>
-    <li>Conso 3 mois : {{ regle.conso_nourriture_3mois }} g</li>
-    <li>Nombre max de portées : {{ regle.nb_max_portee }}</li>
-    <li>Nombre max de cages : {{ regle.nb_max_cage }}</li>
-    <li>Âge min pour être gravide : {{ regle.age_min_gravide }} mois</li>
-    <li>Âge max pour être gravide : {{ regle.age_max_gravide }} ans</li>
-    <li>Durée gestation : {{ regle.duree_gestation }} mois</li>
-    {% endfor %}
-</ul>
 
+<html>
+<head>
+    <style>
+
+    body {
+        font-family: Arial, sans-serif;
+        background-color:rgb(249, 210, 242);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    h2 {
+        text-align: center; 
+        color: #48dece;
+    }
+
+    ul {
+        list-style: none;
+        padding: 0;
+    }
+
+    </style>
+</head>
+
+<body>
+    <div>
+        <h2>Règles du jeu</h2>
+        <ul>
+            {% for regle in regles %}
+            <li>🐰 Prix de la nourriture : {{ regle.price_food }} €</li>
+            <li>🐰 Prix de la cage : {{ regle.price_cage }} €</li>
+            <li>🐰 Prix de vente d’un lapin : {{ regle.price_sale_lapin }} €</li>
+            <li>🐰 Conso 1 mois : {{ regle.conso_nourriture_1mois }} g</li>
+            <li>🐰 Conso 2 mois : {{ regle.conso_nourriture_2mois }} g</li>
+            <li>🐰 Conso 3 mois : {{ regle.conso_nourriture_3mois }} g</li>
+            <li>🐰 Nombre max de portées : {{ regle.nb_max_portee }}</li>
+            <li>🐰 Nombre max de cages : {{ regle.nb_max_cage }}</li>
+            <li>🐰 Âge min pour être gravide : {{ regle.age_min_gravide }} mois</li>
+            <li>🐰 Âge max pour être gravide : {{ regle.age_max_gravide }} ans</li>
+            <li>🐰 Durée gestation : {{ regle.duree_gestation }} mois</li>
+            {% endfor %}
+        </ul>
+    </div>
+</body>
+</html>
