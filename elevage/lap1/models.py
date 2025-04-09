@@ -34,17 +34,17 @@ class Individu(models.Model):
         return self.sexe + " - " + str(self.age) + " mois"
     
 class Regle(models.Model):
-        price_food = models.FloatField()
-        price_cage = models.FloatField()
-        price_sale_lapin = models.FloatField()
-        conso_nourriture_1mois = models.FloatField()
-        conso_nourriture_2mois = models.FloatField()
-        conso_nourriture_3mois = models.FloatField()
-        nb_max_portee = models.IntegerField()
-        nb_max_cage = models.IntegerField()
-        age_min_gravide = models.IntegerField()
-        age_max_gravide = models.IntegerField()
-        duree_gestation = models.IntegerField()
+    price_food = models.FloatField()
+    price_cage = models.FloatField()
+    price_sale_lapin = models.FloatField()
+    conso_nourriture_1mois = models.FloatField()
+    conso_nourriture_2mois = models.FloatField()
+    conso_nourriture_3mois = models.FloatField()
+    nb_max_portee = models.IntegerField()
+    nb_max_cage = models.IntegerField()
+    age_min_gravide = models.IntegerField()
+    age_max_gravide = models.IntegerField()
+    duree_gestation = models.IntegerField()
 
-        def __str__(self):
-            return "Règles du jeu"
+    def __str__(self):
+        return "Règles du jeu"
