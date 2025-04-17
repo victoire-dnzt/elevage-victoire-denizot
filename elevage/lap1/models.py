@@ -1,37 +1,41 @@
 from django.db import models
+from django.core.validators import MinValueValidator
 
 # Create your models here.
 
 class Elevage(models.Model):
     Nom_de_mon_elevage = models.CharField(max_length=200)
-    Nombre_de_lapins_males = models.IntegerField()
-    Nombre_de_lapins_femelles = models.IntegerField()
-    Quantité_de_nourriture_initiale = models.FloatField()
-    Nombre_de_cages = models.IntegerField()
-    Argent_initial = models.FloatField()
+    Nombre_de_lapins_males = models.IntegerField(validators=[MinValueValidator(0)])
+    Nombre_de_lapins_femelles = models.IntegerField(validators=[MinValueValidator(0)])
+    Nombre_de_cages = models.IntegerField(validators=[MinValueValidator(0)])
+    Argent_initial = models.FloatField(validators=[MinValueValidator(0)])
+    Nourriture_disponible = models.IntegerField(validators=[MinValueValidator(0)], default =0)
+    Nombre_de_femelles_en_gestation = models.IntegerField(validators=[MinValueValidator(0)],default = 0)
 
 
     def __str__(self):
         return self.Nom_de_mon_elevage
     
 class Individu(models.Model):
-    sexe_choix= [
+    SEXE_CHOIX = [
         ('M', 'Mâle'),
         ('F', 'Femelle'),
     ]
-    etat_choix = [
+    ETAT_CHOIX = [
         ('P', 'Présent'),
         ('V', 'Vendu'),
         ('M', 'Mort'),
         ('G', 'Gravide'),
     ]
-    elevage = models.ForeignKey(Elevage, on_delete=models.CASCADE)
-    sexe = models.CharField(max_length=1, choices=sexe_choix)
+
+    elevage = models.ForeignKey("Elevage", on_delete=models.CASCADE)
+    sexe = models.CharField(max_length=1, choices=SEXE_CHOIX)
     age = models.IntegerField()
-    etat = models.CharField(max_length=1, choices=etat_choix)
+    etat = models.CharField(max_length=1, choices=ETAT_CHOIX)
 
     def __str__(self):
-        return self.sexe + " - " + str(self.age) + " mois"
+        return f"{self.get_sexe_display()} - {self.age} mois - {self.get_etat_display()}"
+    
     
 class Regle(models.Model):
     price_food = models.FloatField()

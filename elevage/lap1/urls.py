@@ -8,6 +8,6 @@ urlpatterns = [
     path('regles/', views.regles, name='regles'),
     path('nouveau/', views.new_elevage, name='nouveau'),
     path('menu/', views.menu, name='menu'),
-    path('actions/<int:elevage_id>/', views.actions, name='actions')
+    path('actions/<int:elevage_id>/', views.actions, name='actions'),
 ]
 

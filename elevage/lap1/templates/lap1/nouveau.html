@@ -1,6 +1,37 @@
-<h2>Nouvel élevage</h2>
-<form method="post">
-    {% csrf_token %}
-    {{ form.as_p }}
-    <button type="submit">Créer</button>
-</form>
+<html>
+<head>
+    <style>
+    body {
+        font-family: Arial, sans-serif;
+        background-color: rgb(249, 210, 242);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        margin: 0;
+    }
+
+    h2 {
+        text-align: center; 
+        color: #48dece;
+    }
+    
+    ul {
+        list-style: none;
+        padding: 0;
+    }
+
+    </style>
+
+</head>
+<body>
+    <div>
+        <h2>Nouvel élevage</h2>
+        <form method="post">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit">Créer</button>
+        </form>
+    </div>
+</body>
+</html>

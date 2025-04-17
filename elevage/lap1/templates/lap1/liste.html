@@ -1,22 +1,43 @@
 <head>
     <style>
-        body {
-            background-color: rgb(248, 224, 240);
-        }
 
-        h2 {
-            color: rgb(72, 222, 209);
-            font-family: "Comic Sans MS", cursive, sans-serif;
-        }
+    body {
+        font-family: Arial, sans-serif;
+        background-color:rgb(249, 210, 242);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    h2 {
+        text-align: center; 
+        color: #48dece;
+    }
+
+    ul {
+        list-style: none;
+        padding: 0;
+    }
+
+    .bloc_du_milieu {
+        background-color: white;
+        padding: 30px;
+        border-radius: 15px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        width: 80%;
+        max-width: 600px;
+    }
 
     </style>
 </head>
 
 <body>
-<h2>Liste des élevages</h2>
-<ul>
-    {% for elevage in elevages %}
-        <li><a href="{% url 'elevage' elevage.id %}">{{ elevage.Nom_de_mon_elevage }}</a></li>
-    {% endfor %}
-</ul>
+    <div class= "bloc_du_milieu">
+        <h2>Liste des élevages</h2>
+        <ul>
+            {% for elevage in elevages %}
+             <li><a href="{% url 'elevage' elevage.id %}">{{ elevage.Nom_de_mon_elevage }}</a></li>
+            {% endfor %}
+        </ul>
+    </div>
 </body>
