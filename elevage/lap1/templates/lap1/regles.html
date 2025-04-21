@@ -1,57 +1,98 @@
-
-<html>
 <head>
-    <style>
-
-    body {
-        font-family: Arial, sans-serif;
-        background-color:rgb(249, 210, 242);
-        display: flex;
-        justify-content: center;
-        apgn-items: center;
+  <meta charset="UTF-8">
+  <title>Règles du jeu</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <style>
+    html, body {
+      height: 100%;
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background-color: rgb(249, 210, 242);
     }
 
-    h2 {
-        text-apgn: center; 
-        color: #48dece;
-    }
-
-    ul {
-        pst-style: none;
-        padding: 0;
+    .container-rules {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
     }
 
     .bloc_du_milieu {
-        background-color: white;
-        padding: 30px;
-        border-radius: 15px;
-        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-        width: 80%;
-        max-width: 600px;
+      background-color: white;
+      padding: 30px;
+      border-radius: 15px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      width: 90%;
+      max-width: 700px;
     }
 
-    </style>
+    h2 {
+      text-align: center;
+      color: #48dece;
+      margin-bottom: 20px;
+    }
+
+    ul {
+      list-style: none;
+      padding-left: 0;
+    }
+
+    li {
+      margin-bottom: 10px;
+    }
+
+    .btn-custom {
+      background-color: #48dece;
+      color: white;
+      border: none;
+    }
+
+    .btn-custom:hover {
+      background-color: #3ccabc;
+    }
+  </style>
 </head>
 
 <body>
-    <div class="bloc_du_milieu">
-        <h2>Règles du jeu</h2>
-    <p> Dans ce jeu, vous aurez l'opportunité d'élever des lapins. Choississez vos conditions initiales: le nombre de lapins que vous aurez au départ, l'argent et le matériel avec lequel vous démarrez le jeu" 
-        <ul>
-            {% for regle in regles %}
-            <p> 🐰 Prix de la nourriture : {{ regle.price_food }} € <br>
-                🐰 Prix de la cage : {{ regle.price_cage }} € <br>
-                🐰 Prix de vente d’un lapin : {{ regle.price_sale_lapin }} €</p>
-            <p>🐰 Consommation d'un lapin âgé de 1 mois : {{ regle.conso_nourriture_1mois }} g</p>
-            <p>🐰 Conso 2 mois : {{ regle.conso_nourriture_2mois }} g</p>
-            <p>🐰 Conso 3 mois : {{ regle.conso_nourriture_3mois }} g</p>
-            <p>🐰 Nombre max de portées : {{ regle.nb_max_portee }}</p>
-            <p>🐰 Nombre max de cages : {{ regle.nb_max_cage }}</p>
-            <p>🐰 Âge min pour être gravide : {{ regle.age_min_gravide }} mois</p>
-            <p>🐰 Âge max pour être gravide : {{ regle.age_max_gravide }} ans</p>
-            <p>🐰 Durée gestation : {{ regle.duree_gestation }} mois</p>
-            {% endfor %}
-        </ul>
-    </div>
+
+  <div class="dropdown position-absolute top-0 end-0 m-3">
+    <button class="btn btn-custom dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+      Menu du jeu
+    </button>
+    <ul class="dropdown-menu">
+        <li><a class="dropdown-item" href="{% url 'index' %}">Accueil</a></li>
+        <li><a class="dropdown-item" href="{% url 'regles' %}">Voir les règles du jeu</a></li>
+        <li><a class="dropdown-item" href="{% url 'liste' %}">Voir/Modifier tes élevages</a></li>
+        <li><a class="dropdown-item" href="{% url 'nouveau' %}">Créer un nouvel élevage</a></li>
+    </ul>
+  </div>
+
+  <div class="container-rules">
+    <div class="bloc_du_milieu">
+      <h2>Règles du jeu</h2>
+      <p>
+        Dans ce jeu, vous aurez l'opportunité d'élever des lapins. Choisissez vos conditions initiales : le nombre de lapins (mâles et femelles) que vous aurez au départ, l'argent et le matériel avec lequel vous démarrez le jeu. Soyez malins...
+      </p>
+      <ul>
+        {% for regle in regles %}
+          <li>🐰 Prix de la nourriture : {{ regle.price_food }} €</li>
+          <li>🐰 Prix de la cage : {{ regle.price_cage }} €</li>
+          <li>🐰 Prix de vente d’un lapin : {{ regle.price_sale_lapin }} €</li>
+          <li>🐰 Prix d'achat d’un lapin : {{ regle.price_buy_lapin }} €</li>
+          <li>🐰 Conso 1 mois : {{ regle.conso_nourriture_1mois }} g</li>
+          <li>🐰 Conso 2 mois : {{ regle.conso_nourriture_2mois }} g</li>
+          <li>🐰 Conso adulte : {{ regle.conso_nourriture_3mois }} g</li>
+          <li>🐰 Nombre max de portées : {{ regle.nb_max_portee }}</li>
+          <li>🐰 Lapins par cage : {{ regle.nb_max_cage }}</li>
+          <li>🐰 Âge min gravide : {{ regle.age_min_gravide }} mois</li>
+          <li>🐰 Âge max gravide : {{ regle.age_max_gravide }} ans</li>
+          <li>🐰 Durée gestation : {{ regle.duree_gestation }} mois</li>
+        {% endfor %}
+      </ul>
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
 </body>
 </html>

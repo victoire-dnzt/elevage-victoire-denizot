@@ -11,6 +11,7 @@ class Elevage(models.Model):
     Argent_initial = models.FloatField(validators=[MinValueValidator(0)])
     Nourriture_disponible = models.IntegerField(validators=[MinValueValidator(0)], default =0)
     Nombre_de_femelles_en_gestation = models.IntegerField(validators=[MinValueValidator(0)],default = 0)
+    mois = models.IntegerField(default=1)
 
 
     def __str__(self):
@@ -26,12 +27,20 @@ class Individu(models.Model):
         ('V', 'Vendu'),
         ('M', 'Mort'),
         ('G', 'Gravide'),
+        ('S', 'Malade')
     ]
 
     elevage = models.ForeignKey("Elevage", on_delete=models.CASCADE)
     sexe = models.CharField(max_length=1, choices=SEXE_CHOIX)
     age = models.IntegerField()
     etat = models.CharField(max_length=1, choices=ETAT_CHOIX)
+    mois_debut_gestation = models.IntegerField(null=True, blank=True)
+    
+    @property
+    def duree_gestation_lapin(self):
+        if self.mois_debut_gestation is not None:
+            return self.elevage.mois - self.mois_debut_gestation
+        return None
 
     def __str__(self):
         return f"{self.get_sexe_display()} - {self.age} mois - {self.get_etat_display()}"
@@ -41,6 +50,7 @@ class Regle(models.Model):
     price_food = models.FloatField()
     price_cage = models.FloatField()
     price_sale_lapin = models.FloatField()
+    price_buy_lapin =models.FloatField(default =0)
     conso_nourriture_1mois = models.FloatField()
     conso_nourriture_2mois = models.FloatField()
     conso_nourriture_3mois = models.FloatField()

@@ -1,43 +1,64 @@
 <head>
+    <title>Liste des Élevages</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: rgb(249, 210, 242);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
 
-    body {
-        font-family: Arial, sans-serif;
-        background-color:rgb(249, 210, 242);
-        display: flex;
-        justify-content: center;
-        align-items: center;
-    }
+        h2 {
+            text-align: center;
+            color: #48dece;
+        }
 
-    h2 {
-        text-align: center; 
-        color: #48dece;
-    }
+        ul {
+            list-style: none;
+            padding: 0;
+        }
 
-    ul {
-        list-style: none;
-        padding: 0;
-    }
+        .bloc_du_milieu {
+            background-color: white;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            width: 80%;
+            max-width: 600px;
+        }
 
-    .bloc_du_milieu {
-        background-color: white;
-        padding: 30px;
-        border-radius: 15px;
-        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-        width: 80%;
-        max-width: 600px;
-    }
-
+        .dropdown {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+        }
     </style>
 </head>
 
 <body>
-    <div class= "bloc_du_milieu">
-        <h2>Liste des élevages</h2>
+    <div class="bloc_du_milieu">
+        <h2>Liste des Élevages</h2>
         <ul>
             {% for elevage in elevages %}
-             <li><a href="{% url 'elevage' elevage.id %}">{{ elevage.Nom_de_mon_elevage }}</a></li>
+                <li><a href="{% url 'elevage' elevage.id %}" class="text-decoration-none text-dark">{{ elevage.Nom_de_mon_elevage }}</a></li>
             {% endfor %}
         </ul>
     </div>
+
+    <div class="dropdown position-absolute top-0 end-0 m-3">
+        <button class="btn" style="background-color: #48dece; color: white;" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+            Menu du jeu
+        </button>
+        <ul class="dropdown-menu">
+            <li><a class="dropdown-item" href="{% url 'index' %}">Accueil</a></li>
+            <li><a class="dropdown-item" href="{% url 'regles' %}">Voir les règles du jeu</a></li>
+            <li><a class="dropdown-item" href="{% url 'liste' %}">Voir/Modifier tes élevages</a></li>
+            <li><a class="dropdown-item" href="{% url 'nouveau' %}">Créer un nouvel élevage</a></li>
+        </ul>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>

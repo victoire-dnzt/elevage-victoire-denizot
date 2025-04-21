@@ -1,91 +1,148 @@
-<html>
+<!DOCTYPE html>
+<html lang="fr">
 <head>
+    <meta charset="UTF-8">
+    <title>Détails de l’élevage</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <style>
         body {
-            font-family: Arial, sans-serif;
-            background-color:rgb(249, 210, 242);
+            background-color: rgb(249, 210, 242);
+            padding-top: 70px;
+        }
+        .custom-header {
+            position: fixed;
+            top: 10px;
+            left: 20px;
+            background-color: #48dece;
+            color: white;
+            padding: 10px 15px;
+            border-radius: 10px;
+            z-index: 1030;
+        }
+        .dropdown {
+            position: fixed;
+            top: 10px;
+            right: 20px;
+            z-index: 1030;
+        }
+        .content-wrapper {
             display: flex;
             justify-content: center;
-            align-items: center;
+            gap: 20px;
+            flex-wrap: nowrap;
+            margin-bottom: 30px;
         }
-    
-        h2 {
-            text-align: center; 
-            color: #48dece;
-        }
-    
-        ul {
-            list-style: none;
-            padding: 0;
-        }
-
-        .bloc_du_milieu {
+        .bloc {
             background-color: white;
-            padding: 30px;
+            padding: 25px;
             border-radius: 15px;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-            width: 80%;
-            max-width: 600px;
-            } 
-
-
+            width: 100%;
+            max-width: 400px;
+        }
+        h2, h3 {
+            color: #48dece;
+            text-align: center;
+            margin-bottom: 20px;
+        }
     </style>
 </head>
-
 <body>
-    <div class="bloc_du_milieu">
-        <h2>Détails de l’élevage n°{{ elevage.id }}</h2>
-            <ul>
-                <p>🐰 Nom : {{ elevage.Nom_de_mon_elevage }}</p>
-                <p>🐰 Nombre de lapins femelles : {{ elevage.Nombre_de_lapins_femelles}}</p>
-                <p>🐰 Nombre de lapins males: {{elevage.Nombre_de_lapins_males}} </p>
-                <p>🐰 Nombre de cages : {{ elevage.Nombre_de_cages }}</p>
-                <p>🐰 Argent en caisse : {{ elevage.Argent_initial }} € </p>
-                <p>🐰 Nourriture disponible : {{elevage.Nourriture_disponible }} grammes </p>
-                <p>🐰 Nombre de femelles en gestation :{{elevage.Nombre_de_femelles_en_gestation}}</p>
-            </ul>
 
-        <h3>Individus</h3>
-            <ul>
-                {% for individu in elevage.individu_set.all %}
-                <li>
-                Sexe : {{ individu.sexe }} |
-                Âge : {{ individu.age }} mois |
-                État : {{ individu.etat }}
-                </li>
-                {% empty %}
-                <li>Aucun individu dans cet élevage.</li>
-                {% endfor %}
-            </ul>
 
-<h2>Actions</h2>
-
-<form action = "{% url 'actions' elevage.id %}" method="post">
-    {% csrf_token %}
-    
-    <div>
-        <label for="sale_lapins">Nombre de lapins males à vendre :</label>
-        <input type="number" id="sale_lapins" name="sale_lapins" min="0" max="{{elevage.Nombre_de_lapins_males}}" value="0">
+    <div class="custom-header">
+        Mois {{ elevage.mois }}
     </div>
 
-    <div>
-        <label for="sale_lapins">Nombre de lapins femelles à vendre :</label>
-        <input type="number" id="sale_lapins2" name="sale_lapins2" min="0" max="{{elevage.Nombre_de_lapins_femelles}}" value="0">
-    </div>
     
-    <div>
-        <label for="achat_nourriture">Quantité de nourriture à acheter :</label>
-        <input type="number" id="achat_nourriture" name="achat_nourriture" min="0" step="50" value="0">
-    </div>
+    <div class="dropdown">
+        <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton"
+                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            Menu du jeu
+        </button>
+        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+            <a class="dropdown-item" href="regles">Voir les règles du jeu</a>
+            <a class="dropdown-item" href="liste">Voir/Modifier tes élevages</a>
+            <a class="dropdown-item" href="nouveau">Créer un nouvel élevage</a>
+        </div>
+    </div>
 
-    <div>
-            <label for="gestation">Nombre de femelles entrant en gestation :</label>
-            <input type="number" id="gestation" name="gestation" min="0" value="0">
+
+    <div class="container mt-4">
+        <div class="content-wrapper">
+           
+            <div class="bloc">
+                <h2>Détails</h2>
+                <ul class="list-group">
+                    <li class="list-group-item">🐰 Nom : {{ elevage.Nom_de_mon_elevage }}</li>
+                    <li class="list-group-item">🐰 Femelles : {{ elevage.Nombre_de_lapins_femelles }}</li>
+                    <li class="list-group-item">🐰 Mâles : {{ elevage.Nombre_de_lapins_males }}</li>
+                    <li class="list-group-item">🐰 Cages : {{ elevage.Nombre_de_cages }}</li>
+                    <li class="list-group-item">💰 Argent : {{ elevage.Argent_initial }} €</li>
+                    <li class="list-group-item">🌾 Nourriture : {{ elevage.Nourriture_disponible }} g</li>
+                    <li class="list-group-item">👶 Femelles gestantes : {{ elevage.Nombre_de_femelles_en_gestation }}</li>
+                </ul>
+            </div>
+
+            <div class="bloc">
+                <h2>Actions</h2>
+                <form action="{% url 'actions' elevage.id %}" method="post">
+                    {% csrf_token %}
+                    <div class="form-group">
+                        <label>Lapins mâles à vendre</label>
+                        <input type="number" name="sale_lapins" class="form-control" min="0" max="{{ elevage.Nombre_de_lapins_males }}" value="0">
+                    </div>
+                    <div class="form-group">
+                        <label>Lapins femelles à vendre</label>
+                        <input type="number" name="sale_lapins2" class="form-control" min="0" max="{{ elevage.Nombre_de_lapins_femelles }}" value="0">
+                    </div>
+                    <div class="form-group">
+                        <label>Nourriture à acheter (g)</label>
+                        <input type="number" name="achat_nourriture" class="form-control" min="0" step="250" value="0">
+                    </div>
+                    <div class="form-group">
+                        <label>Femelles en gestation</label>
+                        <input type="number" name="gestation" class="form-control" min="0" value="0">
+                    </div>
+                    <div class="form-group">
+                        <label>Cages à acheter</label>
+                        <input type="number" name="achat_cages" class="form-control" min="0" value="0">
+                    </div>
+                    <div class="form-group">
+                        <label>Mâles à acheter</label>
+                        <input type="number" name="achat_males" class="form-control" min="0" value="0">
+                    </div>
+                    <div class="form-group">
+                        <label>Femelles à acheter</label>
+                        <input type="number" name="achat_femelles" class="form-control" min="0" value="0">
+                    </div>
+                    <button type="submit" class="btn btn-primary btn-block">Passer au mois suivant</button>
+                </form>
+                <form action="{% url 'delete_elevage' elevage.id %}" method="post" class="mt-2">
+                    {% csrf_token %}
+                    <button type="submit" class="btn btn-danger btn-block">Supprimer cet élevage</button>
+                </form>
+            </div>
+
+            <div class="bloc">
+                <h3>Individus</h3>
+                <ul class="list-group">
+                    {% for individu in elevage.individu_set.all %}
+                    <li class="list-group-item">
+                        Sexe : {{ individu.sexe }} | Âge : {{ individu.age }} mois<br>
+                        État : {{ individu.etat }} | Gestation : {{ individu.duree_gestation_lapin|default:"None" }} mois
+                    </li>
+                    {% empty %}
+                    <li class="list-group-item">Aucun individu dans cet élevage.</li>
+                    {% endfor %}
+                </ul>
+            </div>
+        </div>
     </div>
-    
-    <button type="submit">Passer au mois suivant</button>
-</form>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 
 </body>
-
-<html>
+</html>
