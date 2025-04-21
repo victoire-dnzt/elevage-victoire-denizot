@@ -9,7 +9,7 @@ class Elevage(models.Model):
     Nombre_de_lapins_femelles = models.IntegerField(validators=[MinValueValidator(0)])
     Nombre_de_cages = models.IntegerField(validators=[MinValueValidator(0)])
     Argent_initial = models.FloatField(validators=[MinValueValidator(0)])
-    Nourriture_disponible = models.IntegerField(validators=[MinValueValidator(0)], default =0)
+    Nourriture_disponible = models.IntegerField(validators=[MinValueValidator(0)])
     Nombre_de_femelles_en_gestation = models.IntegerField(validators=[MinValueValidator(0)],default = 0)
     mois = models.IntegerField(default=1)
 

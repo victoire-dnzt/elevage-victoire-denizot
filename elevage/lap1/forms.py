@@ -27,7 +27,6 @@ class ActionForm(forms.Form):
     achat_nourriture = forms.IntegerField(
         label='Quantité de nourriture à acheter (en g)',
         min_value=0,
-        widget=forms.NumberInput(attrs={'step': 250})
     )
     gestation = forms.IntegerField(label='Nombre de femelles entrant en gestation', min_value=0)
     achat_femelles = forms.IntegerField(label='Nombre de femelles à acheter', min_value=0)

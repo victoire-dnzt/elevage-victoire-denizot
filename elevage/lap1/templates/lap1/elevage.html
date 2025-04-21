@@ -61,9 +61,10 @@
             Menu du jeu
         </button>
         <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-            <a class="dropdown-item" href="regles">Voir les règles du jeu</a>
-            <a class="dropdown-item" href="liste">Voir/Modifier tes élevages</a>
-            <a class="dropdown-item" href="nouveau">Créer un nouvel élevage</a>
+            <li><a class="dropdown-item" href="{% url 'index' %}">Accueil</a></li>
+            <li><a class="dropdown-item" href="{% url 'regles' %}">Voir les règles du jeu</a></li>
+            <li><a class="dropdown-item" href="{% url 'liste' %}">Voir/Modifier tes élevages</a></li>
+            <li><a class="dropdown-item" href="{% url 'nouveau' %}">Créer un nouvel élevage</a></li>
         </div>
     </div>
 
@@ -98,7 +99,7 @@
                     </div>
                     <div class="form-group">
                         <label>Nourriture à acheter (g)</label>
-                        <input type="number" name="achat_nourriture" class="form-control" min="0" step="250" value="0">
+                        <input type="number" name="achat_nourriture" class="form-control" min="0" step ="250" value="0">
                     </div>
                     <div class="form-group">
                         <label>Femelles en gestation</label>
