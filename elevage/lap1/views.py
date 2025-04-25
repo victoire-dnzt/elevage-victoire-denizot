@@ -183,7 +183,11 @@ def actions(request, elevage_id):
                 elevage.mois += 1
                 elevage.save()
 
+                if elevage.Nombre_de_lapins_femelles + elevage.Nombre_de_lapins_males <=0: 
+                    return render(request, 'lap1/gameover.html')
+
                 return redirect('elevage', elevage_id=elevage.id)
+        
 
         return render(request, 'lap1/elevage.html', {'form': form, 'elevage': elevage})
     
